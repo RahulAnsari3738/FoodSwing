@@ -82,7 +82,7 @@ public class CartController : ControllerBase
         if (!SameItemIDExists)
         {
             cart.CustomerId = insert.CustomerId;
-            cart.RestautantIID = insert.RestautantId;
+            cart.RestautantID = insert.RestautantId;
             cart.ItemId = insert.ItemId;
             cart.Quantity = 1;
             _context.Carts.Add(cart);
@@ -92,7 +92,7 @@ public class CartController : ControllerBase
         else
         {
             Cart existingCart = _context.Carts.Where(x => x.ItemId == insert.ItemId && x.CustomerId == insert.CustomerId).FirstOrDefault();
-            existingCart.RestautantIID = insert.RestautantId;
+            existingCart.RestautantID = insert.RestautantId;
             existingCart.ItemId = insert.ItemId;
             existingCart.Quantity++;
             _context.SaveChanges();
@@ -115,7 +115,7 @@ public class CartController : ControllerBase
         join m in menuItem
         on c.ItemId equals m.ID
         join r in restaurant
-        on c.RestautantIID
+        on c.RestautantID
          equals r.ID
         select new CartDisplay
         {
@@ -153,7 +153,7 @@ public class CartController : ControllerBase
         else
         {
 
-            cart.RestautantIID = update.RestautantId;
+            cart.RestautantID = update.RestautantId;
             cart.ItemId = update.ItemId;
             cart.Quantity = update.Quantity;
 
